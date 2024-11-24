@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            /* 设置背景图片 */
+            background-image: url('{{ url_for('static', filename='index.jpg') }}');
+            /* 背景图片大小设置为覆盖整个页面 */
+            background-size: cover;
+            /* 背景图片位置居中 */
+            background-position: center;
+            /* 确保背景图片不随页面滚动而滚动 */
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            /* 给标题添加阴影使其在背景上更清晰可读 */
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        a {
+            color: white;
+            /* 给链接添加悬停效果 */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+<h1>欢迎来到主页</h1>
+<h2><br><a href="{{ url_for('user.user') }}">前往用户页面</a></h2>
+</body>
+
+</html>

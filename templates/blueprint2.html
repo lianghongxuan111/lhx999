@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>用户页面</title>
+    <style>
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+    <script>
+        function showMessage(messageClass) {
+            const messageElements = document.querySelectorAll(`.${messageClass}`);
+            messageElements.forEach((element) => {
+                element.style.display = 'block';
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 2000); // 2秒后隐藏
+            });
+        }
+
+        window.onload = function() {
+            // 调用显示成功和错误消息的函数（假设后端设置了这两个变量）
+            {% if registration_success %}
+                showMessage('success');
+            {% endif %}
+
+            {% if login_success %}
+                showMessage('success');
+            {% endif %}
+        };
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <h1>用户页面</h1>
+
+    <section class="registration">
+        <h2>注册</h2>
+        <form method="post">
+            <input type="hidden" name="action" value="register">
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码：</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <input type="submit" value="注册">
+        </form>
+
+        {% if registration_success %}
+            <p class="success">注册成功！请登录。</p>
+        {% endif %}
+    </section>
+
+    <section class="login">
+        <h2>登录</h2>
+        <form method="post">
+            <input type="hidden" name="action" value="login">
+            <div class="form-group">
+                <label for="username_login">用户名：</label>
+                <input type="text" id="username_login" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password_login">密码：</label>
+                <input type="password" id="password_login" name="password" required>
+            </div>
+            <input type="submit" value="登录">
+        </form>
+
+        {% if login_success %}
+            <p class="success">登录成功！欢迎回来，{{ username }}！</p>
+        {% endif %}
+    </section>
+
+    {% if username %}
+        <p>你好，{{ username }}！</p>
+    {% endif %}
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('home.home') }}">首页</a>
+</div>
+</body>
+
+</html>
