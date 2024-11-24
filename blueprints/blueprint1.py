@@ -6,6 +6,7 @@ home_bp = Blueprint('home', __name__, template_folder='templates', static_folder
 def home():
     return render_template('blueprint1.html')
 
+
 @home_bp.route('/error')
 def error():
     return render_template('error.html')
