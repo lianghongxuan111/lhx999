@@ -10,6 +10,7 @@ def user():
         password = request.form.get('password')  # 获取密码
         action = request.form.get('action')  # 获取表单的操作类型
 
+
         if action == 'register':
             # 注册用户
             new_user = User(username=username, password=password)
